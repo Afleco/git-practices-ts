@@ -1,7 +1,10 @@
-class Animal {
-    private specie: string;
-
-    constructor(specie: string) {
+abstract class Animal {
+    private specie: Specie;
+    private name: String;
+    private age: number;
+    private isAggressive: boolean;
+    
+    constructor(specie: Specie) {
         this.specie = specie;
     }
 
@@ -9,13 +12,51 @@ class Animal {
         return this.specie;
     }
 
-    public setSpecie(specie: string): void {
+    public setSpecie(specie: Specie): void {
         this.specie = specie;
+    }
+
+    public getName(): String {
+        return this.name;
+    }
+
+    public setName(name: String) {
+        this.name = name;
+    }
+
+    public getAge(): number {
+        return this.age;
+    }
+
+    public setAge(age: number) {
+        this.age = age;
+    }
+
+    public getIsAggresive(isAggressive: boolean) {
+        this.isAggressive = isAggressive;
+    }
+    
+    public abstract calculateHumanAge(age: number): number;
+}
+
+type Specie = 'Dog' | 'Cat' | 'Bird';
+
+class Dog extends Animal {
+    public calculateHumanAge(age: number): number {
+        return age * 7;
     }
 }
 
-class Dog extends Animal {}
+class Cat extends Animal {
+    public calculateHumanAge(age: number): number {
+        return age * 8
+    }
+    
+}
 
-class Cat extends Animal {}
+class Bird extends Animal {
+    public calculateHumanAge(age: number): number {
+        return age * 4;
+    }
 
-class Bird extends Animal {}
+}
