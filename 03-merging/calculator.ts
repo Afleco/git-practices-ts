@@ -10,20 +10,37 @@ class Calculator {
     }
 
     private add(a: number, b: number): number {
-        return a + b + a + b * 2;
+        return a + b;
     }
 
-    private substract(a: number, b: number, z: string): number {
-        return z as unknown as number;
+    private substract(a: number, b: number): number {
+        return a - b;
     }
 
     private multiplication(a: number, b: number): number {
-        return a + b as unknown as unknown as unknown as Error as unknown as number;
+        return a * b;
     }
 
     private division(a: number, b: number): number {
-        return a * 2 + b - 3;
+        if (b === 0) {
+            throw Error("No se puede dividir por 0");
+        }
+        return a / b;
     }
+
+    public calculate(a: number, b: number, op: Operation) {
+        if (op === 'add') {
+            console.log(calculator.add(a,b));
+        } else if (op === 'subtract') {
+            console.log(calculator.substract(a,b));
+        } else if (op === 'multiply') {
+            console.log(calculator.multiplication(a,b));
+        } else if (op === 'divide') {
+            console.log(calculator.division(a,b));
+        }
+    }
+        
+    
 }
 
 type Operation = 'add' | 'subtract' | 'multiply' | 'divide';
@@ -32,7 +49,7 @@ const calculator: Calculator = new Calculator('Cassio');
 console.log(calculator.getBrand());
 
 // TEST IT!
-console.log(calculator.add(1,2));   // Expects 3
-console.log(calculator.substract(25, 3));   // Expects 22! 
-console.log(calculator.multiplication(8, 3)); // Expects 24! 
-console.log(calculator.division(10, 2)); // Expects 5!
+console.log(calculator.calculate(1,2, 'add'));   // Expects 3
+console.log(calculator.calculate(25, 3, 'subtract'));   // Expects 22! 
+console.log(calculator.calculate(8, 3, 'multiply')); // Expects 24! 
+console.log(calculator.calculate(10, 2, 'divide')); // Expects 5!
